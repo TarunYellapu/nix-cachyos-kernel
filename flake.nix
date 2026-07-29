@@ -64,8 +64,7 @@
                 };
               in
               {
-                update-kernel-cachyos = mkApp "update-lernel-cachyos" ./kernel-cachyos/update.py;
-                update-zfs-cachyos = mkApp "update-zfs-cachyos" ./zfs-cachyos/update.py;
+                update-cachyos = mkApp "update-cachyos" ./update.py;
               };
 
             # Allow build unfree modules such as nvidia_x11

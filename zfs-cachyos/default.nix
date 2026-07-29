@@ -8,7 +8,7 @@
 }:
 let
   versionJson = lib.importJSON ./version.json;
-  metadata = versionJson."${variant}" or versionJson.latest;
+  metadata = versionJson."${variant}";
   zfsGeneric = callPackage "${inputs.nixpkgs.outPath}/pkgs/os-specific/linux/zfs/generic.nix" {
     inherit kernel;
   };

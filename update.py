@@ -5,15 +5,17 @@ import subprocess
 import tempfile
 from pathlib import Path
 
+import requests
+
 REPO = "https://github.com/CachyOS/linux-cachyos.git"
 PATCHES_REPO = "https://github.com/CachyOS/kernel-patches.git"
+ZFS_META_URL = "https://raw.githubusercontent.com/CachyOS/zfs/{commit}/META"
+ZFS_ARCHIVE_URL = "https://github.com/CachyOS/zfs/archive/{commit}.tar.gz"
 
 
 @functools.lru_cache(None)
 def nix_sha256_to_sri(hash: str) -> str:
     cmd = ["nix", "hash", "to-sri", "--type", "sha256", hash]
-
-    print(f"Running command: {' '.join(cmd)}")
     result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
 
     if result.returncode != 0:
@@ -29,8 +31,6 @@ def nix_sha256_to_sri(hash: str) -> str:
 @functools.lru_cache(None)
 def run_nix_prefetch_url(url: str) -> str:
     cmd = ["nix-prefetch-url", url]
-
-    print(f"Running command: {' '.join(cmd)}")
     result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
 
     if result.returncode != 0:
@@ -55,8 +55,6 @@ def run_nix_prefetch_git_subfolder(url: str, rev: str, subfolder: str) -> str:
         subfolder,
         "--quiet",
     ]
-
-    print(f"Running command: {' '.join(cmd)}")
     result = subprocess.run(cmd, capture_output=True, text=True, timeout=600)
 
     if result.returncode != 0:
@@ -114,6 +112,31 @@ def get_rev(repo: str | Path) -> str:
     ).stdout.strip()
 
 
+def get_zfs_commit(pkgbuild_text: str) -> str:
+    commit = re.search(r"zfs\.git#commit=([0-9a-f]{40})", pkgbuild_text)
+    if not commit:
+        raise ValueError("Cannot find ZFS commit ID in PKGBUILD")
+    return commit[1]
+
+
+@functools.lru_cache(None)
+def get_zfs_version(commit: str) -> str:
+    url = ZFS_META_URL.format(commit=commit)
+    print(f"{url=}")
+    metadata = requests.get(url, timeout=300).text
+    version = re.search(r"^Version:\s+([0-9\.]+)$", metadata, re.MULTILINE)
+    if not version:
+        raise ValueError(f"Cannot find ZFS version for {commit=}")
+    return version[1]
+
+
+@functools.lru_cache(None)
+def get_zfs_hash(commit: str) -> str:
+    url = ZFS_ARCHIVE_URL.format(commit=commit)
+    print(f"{url=}")
+    return nix_sha256_to_sri(run_nix_prefetch_url(url))
+
+
 class TemporaryGitRepo(tempfile.TemporaryDirectory):
     def __init__(self, repo_url: str, **kwargs):
         super().__init__(**kwargs)
@@ -127,14 +150,17 @@ class TemporaryGitRepo(tempfile.TemporaryDirectory):
 
 
 if __name__ == "__main__":
-    with TemporaryGitRepo(REPO, ignore_cleanup_errors=True) as dir, TemporaryGitRepo(
-        PATCHES_REPO, ignore_cleanup_errors=True
-    ) as patches_dir:
+    with (
+        TemporaryGitRepo(REPO, ignore_cleanup_errors=True) as dir,
+        TemporaryGitRepo(PATCHES_REPO, ignore_cleanup_errors=True) as patches_dir,
+    ):
         commit = get_rev(dir)
         patches_commit = get_rev(patches_dir)
         print(f"{commit=} {patches_commit=}")
 
         variants = {}
+        zfs_versions = {}
+
         for variant in find_variants(dir):
             print(f"Variant {variant}")
             pkgbuild = (dir / variant / "PKGBUILD").read_text()
@@ -168,12 +194,28 @@ if __name__ == "__main__":
                 "patchHash": patch_hash,
             }
 
+            zfs_commit = get_zfs_commit(pkgbuild)
+            zfs_version = get_zfs_version(zfs_commit)
+            zfs_hash = get_zfs_hash(zfs_commit)
+            zfs_url = ZFS_ARCHIVE_URL.format(commit=zfs_commit)
+            print(f"  zfs: {zfs_commit=} {zfs_version=} {zfs_hash=}")
+            zfs_versions[variant] = {
+                "commit": zfs_commit,
+                "version": zfs_version,
+                "url": zfs_url,
+                "hash": zfs_hash,
+            }
+
     current = Path.cwd()
     while not (current / "flake.lock").exists():
         if current == current.parent:
             raise RuntimeError("Could not find flake.lock in any parent directory, exiting")
         current = current.parent
 
-    output_file = current / "kernel-cachyos" / "version.json"
-    with open(output_file, "w", encoding="utf-8") as f:
+    kernel_output_file = current / "kernel-cachyos" / "version.json"
+    with open(kernel_output_file, "w", encoding="utf-8") as f:
         json.dump(variants, f, indent=2, sort_keys=True)
+
+    zfs_output_file = current / "zfs-cachyos" / "version.json"
+    with open(zfs_output_file, "w", encoding="utf-8") as f:
+        json.dump(zfs_versions, f, indent=2, sort_keys=True)

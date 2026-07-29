@@ -36,7 +36,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos";
     })
     (mkCachyKernel {
       pname = "linux-cachyos-latest-x86_64-v2";
@@ -46,7 +46,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos";
       processorOpt = "x86_64-v2";
     })
     (mkCachyKernel {
@@ -57,7 +57,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos";
       processorOpt = "x86_64-v3";
     })
     (mkCachyKernel {
@@ -68,7 +68,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos";
       processorOpt = "x86_64-v4";
     })
     (mkCachyKernel {
@@ -79,7 +79,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos";
       processorOpt = "zen4";
     })
     (mkCachyKernel {
@@ -90,7 +90,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos";
       lto = "thin";
     })
     (mkCachyKernel {
@@ -101,7 +101,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos";
       lto = "thin";
       processorOpt = "x86_64-v2";
     })
@@ -113,7 +113,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos";
       lto = "thin";
       processorOpt = "x86_64-v3";
     })
@@ -125,7 +125,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos";
       lto = "thin";
       processorOpt = "x86_64-v4";
     })
@@ -137,7 +137,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos";
       lto = "thin";
       processorOpt = "zen4";
     })
@@ -151,7 +151,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "lts";
+      zfsVariant = "linux-cachyos-lts";
     })
     (mkCachyKernel {
       pname = "linux-cachyos-lts-x86_64-v2";
@@ -161,7 +161,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "lts";
+      zfsVariant = "linux-cachyos-lts";
       processorOpt = "x86_64-v2";
     })
     (mkCachyKernel {
@@ -172,7 +172,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "lts";
+      zfsVariant = "linux-cachyos-lts";
       processorOpt = "x86_64-v3";
     })
     (mkCachyKernel {
@@ -183,7 +183,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "lts";
+      zfsVariant = "linux-cachyos-lts";
       processorOpt = "x86_64-v4";
     })
     (mkCachyKernel {
@@ -194,7 +194,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "lts";
+      zfsVariant = "linux-cachyos-lts";
       processorOpt = "zen4";
     })
     (mkCachyKernel {
@@ -205,7 +205,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "lts";
+      zfsVariant = "linux-cachyos-lts";
       lto = "thin";
     })
     (mkCachyKernel {
@@ -216,7 +216,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "lts";
+      zfsVariant = "linux-cachyos-lts";
       lto = "thin";
       processorOpt = "x86_64-v2";
     })
@@ -228,7 +228,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "lts";
+      zfsVariant = "linux-cachyos-lts";
       lto = "thin";
       processorOpt = "x86_64-v3";
     })
@@ -240,7 +240,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "lts";
+      zfsVariant = "linux-cachyos-lts";
       lto = "thin";
       processorOpt = "x86_64-v4";
     })
@@ -252,7 +252,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "lts";
+      zfsVariant = "linux-cachyos-lts";
       lto = "thin";
       processorOpt = "zen4";
     })
@@ -266,7 +266,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos-bore";
       cpusched = "bore";
     })
     (mkCachyKernel {
@@ -277,7 +277,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos-bore";
       cpusched = "bore";
       processorOpt = "x86_64-v2";
     })
@@ -289,7 +289,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos-bore";
       cpusched = "bore";
       processorOpt = "x86_64-v3";
     })
@@ -301,7 +301,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos-bore";
       cpusched = "bore";
       processorOpt = "x86_64-v4";
     })
@@ -313,7 +313,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos-bore";
       cpusched = "bore";
       processorOpt = "zen4";
     })
@@ -325,7 +325,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos-bore";
       lto = "thin";
       cpusched = "bore";
     })
@@ -337,7 +337,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos-bore";
       lto = "thin";
       cpusched = "bore";
       processorOpt = "x86_64-v2";
@@ -350,7 +350,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos-bore";
       lto = "thin";
       cpusched = "bore";
       processorOpt = "x86_64-v3";
@@ -363,7 +363,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos-bore";
       lto = "thin";
       cpusched = "bore";
       processorOpt = "x86_64-v4";
@@ -376,7 +376,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos-bore";
       lto = "thin";
       cpusched = "bore";
       processorOpt = "zen4";
@@ -391,7 +391,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos-bmq";
       cpusched = "bmq";
     })
     (mkCachyKernel {
@@ -402,7 +402,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos-bmq";
       lto = "thin";
       cpusched = "bmq";
     })
@@ -414,7 +414,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos-deckify";
       acpiCall = true;
       handheld = true;
     })
@@ -426,7 +426,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos-deckify";
       lto = "thin";
       acpiCall = true;
       handheld = true;
@@ -439,7 +439,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos-eevdf";
       cpusched = "eevdf";
     })
     (mkCachyKernel {
@@ -450,7 +450,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos-eevdf";
       cpusched = "eevdf";
       lto = "thin";
     })
@@ -462,7 +462,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "hardened";
+      zfsVariant = "linux-cachyos-hardened";
       hardened = true;
     })
     (mkCachyKernel {
@@ -473,7 +473,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "hardened";
+      zfsVariant = "linux-cachyos-hardened";
       hardened = true;
       lto = "thin";
     })
@@ -485,7 +485,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "rc";
+      zfsVariant = "linux-cachyos-rc";
     })
     (mkCachyKernel {
       pname = "linux-cachyos-rc-lto";
@@ -495,7 +495,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "rc";
+      zfsVariant = "linux-cachyos-rc";
       lto = "thin";
     })
     (mkCachyKernel {
@@ -506,7 +506,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos-rt-bore";
       rt = true;
       cpusched = "rt-bore";
     })
@@ -518,7 +518,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos-rt-bore";
       rt = true;
       cpusched = "rt-bore";
       lto = "thin";
@@ -531,7 +531,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos-server";
       cpusched = "eevdf";
       hzTicks = "300";
       preemptType = "none";
@@ -544,7 +544,7 @@ builtins.listToAttrs (
         cachyosConfigFile
         cachyosPatchesSrc
         ;
-      zfsVariant = "latest";
+      zfsVariant = "linux-cachyos-server";
       cpusched = "eevdf";
       hzTicks = "300";
       preemptType = "none";

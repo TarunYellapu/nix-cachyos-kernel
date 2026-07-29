@@ -1,26 +1,62 @@
 {
-  "latest": {
+  "linux-cachyos": {
     "commit": "c681af76c5a6a15caada25eb13090e41218c7831",
-    "version": "2.4.3",
+    "hash": "sha256-DbjelyUogK50iDyV7hEuMsTMuIewrcBIpLC8ff9G/vo=",
     "url": "https://github.com/CachyOS/zfs/archive/c681af76c5a6a15caada25eb13090e41218c7831.tar.gz",
-    "hash": "sha256-DbjelyUogK50iDyV7hEuMsTMuIewrcBIpLC8ff9G/vo="
+    "version": "2.4.3"
   },
-  "lts": {
+  "linux-cachyos-bmq": {
     "commit": "c681af76c5a6a15caada25eb13090e41218c7831",
-    "version": "2.4.3",
+    "hash": "sha256-DbjelyUogK50iDyV7hEuMsTMuIewrcBIpLC8ff9G/vo=",
     "url": "https://github.com/CachyOS/zfs/archive/c681af76c5a6a15caada25eb13090e41218c7831.tar.gz",
-    "hash": "sha256-DbjelyUogK50iDyV7hEuMsTMuIewrcBIpLC8ff9G/vo="
+    "version": "2.4.3"
   },
-  "rc": {
+  "linux-cachyos-bore": {
     "commit": "c681af76c5a6a15caada25eb13090e41218c7831",
-    "version": "2.4.3",
+    "hash": "sha256-DbjelyUogK50iDyV7hEuMsTMuIewrcBIpLC8ff9G/vo=",
     "url": "https://github.com/CachyOS/zfs/archive/c681af76c5a6a15caada25eb13090e41218c7831.tar.gz",
-    "hash": "sha256-DbjelyUogK50iDyV7hEuMsTMuIewrcBIpLC8ff9G/vo="
+    "version": "2.4.3"
   },
-  "hardened": {
+  "linux-cachyos-deckify": {
     "commit": "c681af76c5a6a15caada25eb13090e41218c7831",
-    "version": "2.4.3",
+    "hash": "sha256-DbjelyUogK50iDyV7hEuMsTMuIewrcBIpLC8ff9G/vo=",
     "url": "https://github.com/CachyOS/zfs/archive/c681af76c5a6a15caada25eb13090e41218c7831.tar.gz",
-    "hash": "sha256-DbjelyUogK50iDyV7hEuMsTMuIewrcBIpLC8ff9G/vo="
+    "version": "2.4.3"
+  },
+  "linux-cachyos-eevdf": {
+    "commit": "c681af76c5a6a15caada25eb13090e41218c7831",
+    "hash": "sha256-DbjelyUogK50iDyV7hEuMsTMuIewrcBIpLC8ff9G/vo=",
+    "url": "https://github.com/CachyOS/zfs/archive/c681af76c5a6a15caada25eb13090e41218c7831.tar.gz",
+    "version": "2.4.3"
+  },
+  "linux-cachyos-hardened": {
+    "commit": "c681af76c5a6a15caada25eb13090e41218c7831",
+    "hash": "sha256-DbjelyUogK50iDyV7hEuMsTMuIewrcBIpLC8ff9G/vo=",
+    "url": "https://github.com/CachyOS/zfs/archive/c681af76c5a6a15caada25eb13090e41218c7831.tar.gz",
+    "version": "2.4.3"
+  },
+  "linux-cachyos-lts": {
+    "commit": "c681af76c5a6a15caada25eb13090e41218c7831",
+    "hash": "sha256-DbjelyUogK50iDyV7hEuMsTMuIewrcBIpLC8ff9G/vo=",
+    "url": "https://github.com/CachyOS/zfs/archive/c681af76c5a6a15caada25eb13090e41218c7831.tar.gz",
+    "version": "2.4.3"
+  },
+  "linux-cachyos-rc": {
+    "commit": "c681af76c5a6a15caada25eb13090e41218c7831",
+    "hash": "sha256-DbjelyUogK50iDyV7hEuMsTMuIewrcBIpLC8ff9G/vo=",
+    "url": "https://github.com/CachyOS/zfs/archive/c681af76c5a6a15caada25eb13090e41218c7831.tar.gz",
+    "version": "2.4.3"
+  },
+  "linux-cachyos-rt-bore": {
+    "commit": "c681af76c5a6a15caada25eb13090e41218c7831",
+    "hash": "sha256-DbjelyUogK50iDyV7hEuMsTMuIewrcBIpLC8ff9G/vo=",
+    "url": "https://github.com/CachyOS/zfs/archive/c681af76c5a6a15caada25eb13090e41218c7831.tar.gz",
+    "version": "2.4.3"
+  },
+  "linux-cachyos-server": {
+    "commit": "c681af76c5a6a15caada25eb13090e41218c7831",
+    "hash": "sha256-DbjelyUogK50iDyV7hEuMsTMuIewrcBIpLC8ff9G/vo=",
+    "url": "https://github.com/CachyOS/zfs/archive/c681af76c5a6a15caada25eb13090e41218c7831.tar.gz",
+    "version": "2.4.3"
   }
 }
