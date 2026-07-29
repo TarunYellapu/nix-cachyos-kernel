@@ -18,7 +18,7 @@ lib.mapAttrs' (
       (linuxKernel.packagesFor v).extend (
         final: prev:
         let
-          variant = lib.removePrefix "linux-cachyos-" v.cachyosConfigVariant;
+          variant = v.zfsVariant;
         in
         {
           zfs_cachyos = final.callPackage ../zfs-cachyos {

@@ -14,10 +14,8 @@ lib.makeOverridable (
     pname,
     version,
     src,
-
-    # Kernel config variant to be used as defconfig, e.g. "linux-cachyos-lts".
-    # See https://github.com/CachyOS/linux-cachyos for available values.
-    configVariant,
+    cachyosConfigFile,
+    zfsVariant ? "latest",
 
     # Set to one of "none", "thin" or "full", anything other than "none" uses Clang
     # to build the kernel with the selected LTO option
@@ -83,7 +81,6 @@ lib.makeOverridable (
     # For use in moddirversion
     fullVersion = lib.versions.pad 3 version;
 
-    cachyosConfigFile = "${inputs.cachyos-kernel.outPath}/${configVariant}/config";
     cachyosPatches = builtins.map (p: "${inputs.cachyos-kernel-patches.outPath}/${patchVersion}/${p}") (
       (lib.optional (cpusched == "bore" || cpusched == "rt-bore") "sched/0001-bore-cachy.patch")
       ++ (lib.optional (cpusched == "bmq") "sched/0001-prjc-cachy.patch")
@@ -169,7 +166,7 @@ lib.makeOverridable (
       "pname"
       "version"
       "src"
-      "configVariant"
+      "cachyosConfigFile"
       "lto"
       "prePatch"
       "patches"
@@ -211,8 +208,7 @@ lib.makeOverridable (
       // (args.extraMeta or { });
 
       extraPassthru = {
-        inherit cachyosConfigFile cachyosPatches;
-        cachyosConfigVariant = configVariant;
+        inherit cachyosConfigFile cachyosPatches zfsVariant;
       }
       // (args.extraPassthru or { });
     }

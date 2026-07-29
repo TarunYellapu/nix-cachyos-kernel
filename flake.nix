@@ -8,10 +8,6 @@
       flake = false;
     };
 
-    cachyos-kernel = {
-      url = "github:CachyOS/linux-cachyos";
-      flake = false;
-    };
     cachyos-kernel-patches = {
       url = "github:CachyOS/kernel-patches";
       flake = false;
@@ -61,6 +57,7 @@
                         inherit name;
                         runtimeInputs = [
                           python
+                          pkgs.git
                           pkgs.nix-prefetch-git
                         ];
                         text = ''
@@ -96,8 +93,6 @@
           overlays.pinned = final: prev: {
             cachyosKernels = self.legacyPackages."${final.stdenv.hostPlatform.system}";
           };
-
-          cachyos-kernel-input-path = inputs.cachyos-kernel.outPath;
 
           mkCachyKernel =
             { buildLinux, pkgs, ... }@args:
