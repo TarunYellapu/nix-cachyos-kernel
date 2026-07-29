@@ -1,10 +1,12 @@
 import functools
 import json
+import re
 import subprocess
 import tempfile
 from pathlib import Path
 
 REPO = "https://github.com/CachyOS/linux-cachyos.git"
+PATCHES_REPO = "https://github.com/CachyOS/kernel-patches.git"
 
 
 @functools.lru_cache(None)
@@ -41,6 +43,36 @@ def run_nix_prefetch_url(url: str) -> str:
     return output
 
 
+@functools.lru_cache(None)
+def run_nix_prefetch_git_subfolder(url: str, rev: str, subfolder: str) -> str:
+    cmd = [
+        "nix-prefetch-git",
+        "--url",
+        url,
+        "--rev",
+        rev,
+        "--root-dir",
+        subfolder,
+        "--quiet",
+    ]
+
+    print(f"Running command: {' '.join(cmd)}")
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=600)
+
+    if result.returncode != 0:
+        raise RuntimeError(
+            f"nix-prefetch-git command failed with return code: {result.returncode}\n"
+            f"stderr: {result.stderr}"
+        )
+
+    output = result.stdout.strip()
+    if not output:
+        raise RuntimeError("nix-prefetch-git output is empty")
+
+    data = json.loads(output)
+    return data["hash"]
+
+
 def get_srcname(pkgbuild_text: str) -> str:
     script = pkgbuild_text + "\necho $_srcname"
     result = subprocess.run(
@@ -68,20 +100,39 @@ def find_variants(repo_dir: Path) -> list[str]:
     ]
 
 
-if __name__ == "__main__":
-    with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as dir:
-        dir = Path(dir)
+def major_minor(version: str) -> str:
+    parts = re.findall(r"[0-9]+|[a-zA-Z]+", version)
+    return ".".join(parts[:2])
+
+
+def get_rev(repo: str | Path) -> str:
+    return subprocess.run(
+        ["git", "-C", str(repo), "rev-parse", "HEAD"],
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout.strip()
+
+
+class TemporaryGitRepo(tempfile.TemporaryDirectory):
+    def __init__(self, repo_url: str, **kwargs):
+        super().__init__(**kwargs)
         subprocess.run(
-            ["git", "clone", "--depth", "1", REPO, str(dir)],
+            ["git", "clone", "--depth", "1", repo_url, str(self.name)],
             check=True,
         )
-        commit = subprocess.run(
-            ["git", "-C", str(dir), "rev-parse", "HEAD"],
-            capture_output=True,
-            text=True,
-            check=True,
-        ).stdout.strip()
-        print(f"{commit=}")
+
+    def __enter__(self) -> Path:
+        return Path(self.name)
+
+
+if __name__ == "__main__":
+    with TemporaryGitRepo(REPO, ignore_cleanup_errors=True) as dir, TemporaryGitRepo(
+        PATCHES_REPO, ignore_cleanup_errors=True
+    ) as patches_dir:
+        commit = get_rev(dir)
+        patches_commit = get_rev(patches_dir)
+        print(f"{commit=} {patches_commit=}")
 
         variants = {}
         for variant in find_variants(dir):
@@ -99,12 +150,22 @@ if __name__ == "__main__":
             config_hash = nix_sha256_to_sri(run_nix_prefetch_url(config_url))
             print(f"  config: {config_hash=}")
 
+            patch_version = major_minor(version)
+            patch_hash = run_nix_prefetch_git_subfolder(
+                PATCHES_REPO, patches_commit, f"{patch_version}/"
+            )
+            print(f"  patches: {patch_version=} {patches_commit=} {patch_hash=}")
+
             variants[variant] = {
                 "version": version,
                 "url": url,
                 "hash": hash,
                 "configUrl": config_url,
                 "configHash": config_hash,
+                "patchVersion": patch_version,
+                "patchUrl": PATCHES_REPO,
+                "patchRev": patches_commit,
+                "patchHash": patch_hash,
             }
 
     current = Path.cwd()

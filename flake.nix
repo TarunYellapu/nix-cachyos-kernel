@@ -7,11 +7,6 @@
       url = "github:NixOS/flake-compat";
       flake = false;
     };
-
-    cachyos-kernel-patches = {
-      url = "github:CachyOS/kernel-patches";
-      flake = false;
-    };
   };
 
   nixConfig = {

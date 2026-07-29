@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "cachyos-kernel-patches": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1785252369,
-        "narHash": "sha256-SQvLY9Lco7LRIu/C68h/ynaFFMih4Pdd6qS0zUDEDUA=",
-        "owner": "CachyOS",
-        "repo": "kernel-patches",
-        "rev": "3d5a42bde5558a2838d58766e710a7d458e309dc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "CachyOS",
-        "repo": "kernel-patches",
-        "type": "github"
-      }
-    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -83,7 +67,6 @@
     },
     "root": {
       "inputs": {
-        "cachyos-kernel-patches": "cachyos-kernel-patches",
         "flake-compat": "flake-compat",
         "flake-parts": "flake-parts",
         "nixpkgs": "nixpkgs"

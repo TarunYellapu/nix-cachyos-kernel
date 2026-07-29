@@ -1,5 +1,4 @@
 {
-  inputs,
   lib,
   callPackage,
   buildLinux,
@@ -15,6 +14,7 @@ lib.makeOverridable (
     version,
     src,
     cachyosConfigFile,
+    cachyosPatchesSrc,
     zfsVariant ? "latest",
 
     # Set to one of "none", "thin" or "full", anything other than "none" uses Clang
@@ -75,13 +75,10 @@ lib.makeOverridable (
     helpers = callPackage ../helpers.nix { };
     inherit (helpers) stdenvLLVM ltoMakeflags;
 
-    # For finding patches
-    patchVersion = lib.versions.majorMinor version;
-
     # For use in moddirversion
     fullVersion = lib.versions.pad 3 version;
 
-    cachyosPatches = builtins.map (p: "${inputs.cachyos-kernel-patches.outPath}/${patchVersion}/${p}") (
+    cachyosPatches = builtins.map (p: "${cachyosPatchesSrc}/${p}") (
       (lib.optional (cpusched == "bore" || cpusched == "rt-bore") "sched/0001-bore-cachy.patch")
       ++ (lib.optional (cpusched == "bmq") "sched/0001-prjc-cachy.patch")
       ++ (lib.optional hardened "misc/0001-hardened.patch")
@@ -167,6 +164,7 @@ lib.makeOverridable (
       "version"
       "src"
       "cachyosConfigFile"
+      "cachyosPatchesSrc"
       "lto"
       "prePatch"
       "patches"
