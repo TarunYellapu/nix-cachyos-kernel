@@ -141,7 +141,7 @@ class TemporaryGitRepo(tempfile.TemporaryDirectory):
     def __init__(self, repo_url: str, **kwargs):
         super().__init__(**kwargs)
         subprocess.run(
-            ["git", "clone", "--depth", "1", repo_url, str(self.name)],
+            ["git", "clone", "--depth", "1", "--single-branch", repo_url, str(self.name)],
             check=True,
         )
 
@@ -189,7 +189,6 @@ if __name__ == "__main__":
                 "configUrl": config_url,
                 "configHash": config_hash,
                 "patchVersion": patch_version,
-                "patchUrl": PATCHES_REPO,
                 "patchRev": patches_commit,
                 "patchHash": patch_hash,
             }

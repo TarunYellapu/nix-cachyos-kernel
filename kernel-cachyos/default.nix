@@ -18,7 +18,7 @@ let
       hash = v.configHash;
     };
     cachyosPatchesSrc = fetchgit {
-      url = v.patchUrl;
+      url = "https://github.com/CachyOS/kernel-patches.git";
       rev = v.patchRev;
       rootDir = "${v.patchVersion}/";
       hash = v.patchHash;
